@@ -1,4 +1,4 @@
 require("undefinedmaniac.remap")
-require("undefinedmaniac.packer")
+require("undefinedmaniac.plugins")
 require("undefinedmaniac.set")
 
