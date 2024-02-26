@@ -17,7 +17,7 @@ end)
 
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "tsserver", "clangd", "rust_analyzer", "pyright", "jsonls" },
+	ensure_installed = { "tsserver", "clangd", "rust_analyzer", "jedi_language_server", "jsonls" },
 	handlers = {
 		lsp_zero.default_setup,
 		lua_ls = function()
