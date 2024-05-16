@@ -19,11 +19,16 @@ require("mason").setup()
 require("mason-lspconfig").setup({
 	ensure_installed = { "tsserver", "clangd", "rust_analyzer", "jedi_language_server", "jsonls" },
 	handlers = {
-		lsp_zero.default_setup,
-		lua_ls = function()
-			local lua_opts = lsp_zero.nvim_lua_ls()
-			require('lspconfig').lua_ls.setup(lua_opts)
-		end,
+        function (server_name) -- default handler (optional)
+            require("lspconfig")[server_name].setup {}
+        end,
+        lua_ls = function ()
+            local lua_opts = lsp_zero.nvim_lua_ls()
+            require("lspconfig").lua_ls.setup(lua_opts)
+        end,
+        rust_analyzer = function ()
+            require("rust-tools").setup {}
+        end
 	}
 })
 
@@ -31,28 +36,34 @@ require("mason-lspconfig").setup({
 -- require("lspconfig").lua_ls.setup {}
 -- require("lspconfig").rust_analyzer.setup {}
 -- ...
-require("mason-lspconfig").setup_handlers {
-	-- The first entry (without a key) will be the default handler
-	-- and will be called for each installed server that doesn't have
-	-- a dedicated handler.
-	function (server_name) -- default handler (optional)
-		require("lspconfig")[server_name].setup {}
-	end,
-	-- Next, you can provide a dedicated handler for specific servers.
-	-- For example, a handler override for the `rust_analyzer`:
-    ["rust_analyzer"] = function ()
-        require("rust-tools").setup {}
-        -- require("lspconfig").rust_analyzer.setup {
-        --     settings = {
-        --         ['rust-analyzer'] = {
-        --             diagnostics = {
-        --                 enable = true;
-        --             }
-        --         }
-        --     }
-        -- }
-    end
-	}
+
+-- local lspconfig = require("lspconfig")
+-- require("mason-lspconfig").setup_handlers {
+-- 	-- The first entry (without a key) will be the default handler
+-- 	-- and will be called for each installed server that doesn't have
+-- 	-- a dedicated handler.
+-- 	function (server_name) -- default handler (optional)
+-- 		lspconfig[server_name].setup {}
+-- 	end,
+--     ["lua_ls"] = function ()
+--         local lua_opts = lsp_zero.nvim_lua_ls()
+--         lspconfig.lua_ls.setup(lua_opts)
+--     end,
+-- 	-- Next, you can provide a dedicated handler for specific servers.
+-- 	-- For example, a handler override for the `rust_analyzer`:
+--     ["rust_analyzer"] = function ()
+--         require("rust-tools").setup {}
+--         -- require("lspconfig").rust_analyzer.setup {
+--         --     settings = {
+--         --         ['rust-analyzer'] = {
+--         --             diagnostics = {
+--         --                 enable = true;
+--         --             }
+--         --         }
+--         --     }
+--         -- }
+--     end
+-- }
 	
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
