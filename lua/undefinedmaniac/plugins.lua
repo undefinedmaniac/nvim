@@ -37,24 +37,31 @@ local plugins = {
   "mbbill/undotree",
   "tpope/vim-fugitive",
 
-  {
-	  'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v3.x',
-	  dependencies = {
-		  --- Uncomment these if you want to manage LSP servers from neovim
-		  {'williamboman/mason.nvim'},
-		  {'williamboman/mason-lspconfig.nvim'},
+  {'williamboman/mason.nvim'},
+  {'williamboman/mason-lspconfig.nvim'},
 
-		  -- LSP Support
-		  {'neovim/nvim-lspconfig'},
-		  -- Autocompletion
-		  {'hrsh7th/nvim-cmp'},
-		  {'hrsh7th/cmp-nvim-lsp'},
-		  {'L3MON4D3/LuaSnip'},
-	  }
+  {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
+  -- LSP Support
+  { 
+      'neovim/nvim-lspconfig',
+  },
+  -- Autocompletion
+  {'hrsh7th/nvim-cmp'},
+  {'hrsh7th/cmp-nvim-lsp'},
+  {'L3MON4D3/LuaSnip'},
+
+  {
+      'vxpm/ferris.nvim',
+      opts = {
+          -- your options here
+      }
   },
 
-  'simrat39/rust-tools.nvim',
+  -- {
+  --     'mrcjkb/rustaceanvim',
+  --     version = '^4', -- Recommended
+  --     lazy = false, -- This plugin is already lazy
+  -- },
 
   -- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
   {
